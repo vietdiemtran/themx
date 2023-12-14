@@ -1,29 +1,9 @@
 import { useEffect, useState } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Mail,
-  Menu,
-  MoveToInbox,
-  Search,
-} from "@mui/icons-material";
-import {
   Grid,
-  TextField,
-  Autocomplete,
-  Button,
   useMediaQuery,
   Drawer,
-  IconButton,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   AppBar,
-  Toolbar,
-  Typography,
   Box,
   CssBaseline,
 } from "@mui/material";
@@ -133,13 +113,19 @@ const Home = () => {
   };
 
   const navigationDetail = () => {
-    navigate('/detail')
+    navigate("/detail");
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flex: 1,
+        justifyContent: "center",
+      }}
+    >
       <CssBaseline />
-      <MuiAppBar sx={{ backgroundColor: "white" }} position="fixed" open={open}>
+      {/* <MuiAppBar sx={{ backgroundColor: "white" }} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             aria-label="open drawer"
@@ -159,7 +145,7 @@ const Home = () => {
             sx={{ paddingTop: 1, marginBottom: 2 }}
           >
             <Grid md={3} sx={{ display: { xs: "none", md: "flex" } }}>
-              <text style={{ color: "red" }}>Themx</text>
+              <text style={{ color: "red" }}>Example</text>
             </Grid>
             <Grid
               container
@@ -197,9 +183,9 @@ const Home = () => {
             </Grid>
           </Grid>
         </Toolbar>
-      </MuiAppBar>
+      </MuiAppBar> */}
 
-      <MuiDrawer variant="permanent" open={open}>
+      {/* <MuiDrawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
@@ -255,32 +241,52 @@ const Home = () => {
             </ListItem>
           ))}
         </List>
-      </MuiDrawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: 6 }}>
-        {dataFakeCategory.map(({ id, value }) => (
-          <CategoryItem
-            key={id}
-            isSelect={category === id}
-            value={value}
-            onClick={() => {
-              setCategory(id);
-            }}
-          />
-        ))}
-
-        <Box
-          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
-        >
-          {dataFakeVideo.map(({ id, title, view, time }) => (
-            <VideoItem
-              onClick={navigationDetail}
+      </MuiDrawer> */}
+      <Box
+        sx={{
+          // flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          marginTop: 6,
+          justifyContent: "center",
+        }}
+        width="90%"
+      >
+        <Box>
+          {dataFakeCategory.map(({ id, value }) => (
+            <CategoryItem
               key={id}
-              title={title}
-              view={view}
-              time={time}
+              isSelect={category === id}
+              value={value}
+              onClick={() => {
+                setCategory(id);
+              }}
             />
           ))}
         </Box>
+
+        <Grid
+          marginTop={2}
+          container
+          spacing={2}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
+          {dataFakeVideo.map(({ id, title, view, time, src }) => (
+            <Grid item sm={6} md={4} xs={12}>
+              <VideoItem
+                onClick={navigationDetail}
+                key={id}
+                title={title}
+                view={view}
+                time={time}
+                src={src}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Box>
   );

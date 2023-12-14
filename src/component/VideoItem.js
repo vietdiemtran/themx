@@ -1,48 +1,59 @@
 import { AspectRatio, Divider, Typography } from "@mui/joy";
 import { CardActionArea, Card, Box } from "@mui/material";
+import { useState } from "react";
 
-const VideoItem = ({ title, view, time, onClick }) => {
+const VideoItem = ({ title, view, time, onClick, src }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <Card
       variant="outlined"
       sx={{
         width: {
-          xs: 320,
-          sm: 400,
-          md: 420,
-          lg: 420,
+          xs: "100%",
+          md: "100%",
         },
-        marginTop: 2,
-        marginRight: 2,
+        height: "100%",
       }}
     >
       <CardActionArea
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={onClick}
         sx={{
-          justifyContent: "space-between",
-          height: "100%",
           display: "flex",
           flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
         }}
       >
-        <Box>
+        <Box width="100%">
           <AspectRatio
             sx={{
               width: {
-                xs: 320,
-                sm: 400,
-                md: 420,
-                lg: 420,
+                xs: "100%",
+                md: "100%",
               },
             }}
-            ratio="2"
           >
-            <img
-              src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-              srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
-              loading="lazy"
-              alt=""
-            />
+            {isHovered ? (
+              <video
+                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                muted
+                autoPlay
+              />
+            ) : (
+              <img src={src} loading="lazy" alt="" />
+            )}
+
             <Typography
               sx={{
                 position: "absolute",
@@ -63,6 +74,7 @@ const VideoItem = ({ title, view, time, onClick }) => {
               {time}
             </Typography>
           </AspectRatio>
+
           <Box sx={{ padding: 2, paddingTop: 1, paddingBottom: 1 }}>
             <Typography
               sx={{
@@ -83,8 +95,6 @@ const VideoItem = ({ title, view, time, onClick }) => {
         <Box
           sx={{
             bgcolor: "#f0f4f8",
-            flexDirection: "row",
-            justifyContent: "flex-start",
             width: "100%",
             display: "flex",
             padding: 2,
