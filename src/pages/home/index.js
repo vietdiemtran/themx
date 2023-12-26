@@ -6,6 +6,7 @@ import {
   AppBar,
   Box,
   CssBaseline,
+  Pagination,
 } from "@mui/material";
 import { useTheme, styled } from "@mui/material/styles";
 
@@ -95,7 +96,7 @@ const Home = () => {
   const theme = useTheme();
   const _isMD = useMediaQuery(theme.breakpoints.up("md"));
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -247,7 +248,7 @@ const Home = () => {
           // flexGrow: 1,
           display: "flex",
           flexDirection: "column",
-          marginTop: 6,
+          marginTop: 4,
           justifyContent: "center",
         }}
         width="90%"
@@ -287,6 +288,16 @@ const Home = () => {
             </Grid>
           ))}
         </Grid>
+
+        <Pagination
+          shape="rounded"
+          count={20}
+          size="small"
+          sx={{ alignSelf: "center", margin: 2 }}
+          onChange={(event, page) => {
+            // Todo:
+          }}
+        />
       </Box>
     </Box>
   );
