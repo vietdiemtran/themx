@@ -293,7 +293,7 @@ const Home = () => {
           shape="rounded"
           count={20}
           size="small"
-          sx={{ alignSelf: "center", margin: 2 }}
+          sx={{ alignSelf: "center", margin: 3 }}
           onChange={(event, page) => {
             // Todo:
           }}
